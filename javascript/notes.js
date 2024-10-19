@@ -301,5 +301,17 @@ document.addEventListener("DOMContentLoaded", () => {
        } else {
         editorWrapper.classList.remove("flex");
        }
+
+       deleteBtn.addEventListener("click", () => {
+        newNoteElement.remove();
+        const newNoteCount = noteBar.querySelectorAll(".note-element").length;
+        if (newNoteCount === 1) {
+            noteNumber.textContent = "1 note";
+        } else {
+            noteNumber.textContent = `${newNoteCount} notes`;
+        }
+        noteBegin.style.display = "flex";
+        editorWrapper.classList.remove("flex");
+       });
     });
 });
