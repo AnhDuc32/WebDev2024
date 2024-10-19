@@ -160,38 +160,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const displayNotes = document.querySelector(".display-notes");
   const displayHome = document.querySelector(".display-home");
   const displayFiles = document.querySelector(".display-files");
+  const displayNotebooks = document.querySelector(".display-notebooks");
   const displayTrash = document.querySelector(".display-trash");
   const displaySettings = document.querySelector(".display-settings");
+  const displayCalendar = document.querySelector(".display-calendar");
   
   const noteContainer = document.querySelector(".note-container");
   const mainContent = document.querySelector(".main_content");
   const fileContainer = document.querySelector(".container");
+  const notebookContainer = document.querySelector(".notebooks-section");
   const trashContainer = document.querySelector(".trash-container");
   const settingsContainer = document.querySelector(".settings-container");
   const logOut = document.querySelector(".log-out");
+  const calendarContainer = document.querySelector(".calendar-container");
+
+  function initializeNotebooks() {
+    // Only initialize if notebooks array is empty
+    if (!window.notebooks || window.notebooks.length === 0) {
+      // Add default notebook
+      addNotebookRow(
+        "Default Notebook",
+        "Admin",
+        new Date().toLocaleDateString(),
+        "Everyone"
+      );
+    }
+  }
 
   displayNotes.addEventListener("click", () => {
     mainContent.style.display = "none";
     noteContainer.classList.add("active");
     fileContainer.classList.remove("active");
+    notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
+    calendarContainer.classList.remove("active");
   });
 
   displayHome.addEventListener("click", () => {
     mainContent.style.display = "block";
     noteContainer.classList.remove("active");
     fileContainer.classList.remove("active");
+    notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
+    calendarContainer.classList.remove("active");
   });
 
   displayFiles.addEventListener("click", () => {
     mainContent.style.display = "none";
     fileContainer.classList.add("active");
     noteContainer.classList.remove("active");
+    notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
+    calendarContainer.classList.remove("active");
   }); 
 
   displayTrash.addEventListener("click", () => {
@@ -199,7 +222,9 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.style.display = "none";
     noteContainer.classList.remove("active");
     fileContainer.classList.remove("active");
+    notebookContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
+    calendarContainer.classList.remove("active");
   });
 
   displaySettings.addEventListener("click", () => {
@@ -207,7 +232,31 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.style.display = "none";
     noteContainer.classList.remove("active");
     fileContainer.classList.remove("active");
+    notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
+    calendarContainer.classList.remove("active");
+  });
+
+  displayNotebooks.addEventListener("click", () => {
+    settingsContainer.classList.remove("active");
+    mainContent.style.display = "none";
+    noteContainer.classList.remove("active");
+    fileContainer.classList.remove("active");
+    notebookContainer.classList.add("active");
+    trashContainer.classList.remove("active");
+    calendarContainer.classList.remove("active");
+
+    initializeNotebooks();
+  });
+
+  displayCalendar.addEventListener("click", () => {
+    settingsContainer.classList.remove("active");
+    mainContent.style.display = "none";
+    noteContainer.classList.remove("active");
+    fileContainer.classList.remove("active");
+    notebookContainer.classList.remove("active");
+    trashContainer.classList.remove("active");
+    calendarContainer.classList.add("active");
   });
 
   logOut.addEventListener('click', function(event) {

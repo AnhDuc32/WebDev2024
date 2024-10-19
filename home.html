@@ -29,6 +29,17 @@
     <!-- Settings -->
     <link rel="stylesheet" href="css/settings.css">
     <script src="javascript/settings.js"></script>
+
+    <!--Notebooks-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/notebooks.css">
+    <script src="javascript/notebooks.js"></script>
+
+    <!-- Calendar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <script src="javascript/calendar.js"></script>
 </head>
 <body>
     <div class="everything">
@@ -77,7 +88,8 @@
                     <li class="display-home"><span class="material-symbols-outlined">home</span><span class="text">Home</span></li>
                     <li class="display-notes"><span class="material-symbols-outlined">description</span><span class="text">Notes</span></li>
                     <li class="display-files"><span class="material-symbols-outlined">attach_file</span><span class="text">Files</span></li>
-                    <li><span class="material-symbols-outlined">book_4</span><span class="text">Notebooks</span></li>
+                    <!-- <li class="display-calendar"><span class="material-symbols-outlined">calendar_month</span><span class="text">Calendar</span></li> -->
+                    <li class="display-notebooks"><span class="material-symbols-outlined">book_4</span><span class="text">Notebooks</span></li>
                     <li class="display-trash"><span class="material-symbols-outlined">delete</span><span class="text">Trash</span></li>
                     <li class="display-settings"><span class="material-symbols-outlined">settings</span><span class="text">Settings</span></li>
                 </ul>
@@ -237,6 +249,54 @@
         </div>
        </div>
 
+       <!--Notebooks-->
+       <div class="notebooks-section">
+        <h1>Notebooks</h1>
+        <div class="notebook-container">
+            <div class="left">
+                <p>You have <span id="notebookCount">0</span> notebooks.</p>
+            </div>
+            <div class="right actions-container">
+                <button id="newNotebookBtn">Create New Notebook</button>
+                <div class="sort-button" id="sortBtn">
+                    <i class="ri-sort-desc sort-icon"></i>
+                    <div class="dropdown">
+                        <button onclick="sortNotebooks('date')">Sort by Date</button>
+                        <button onclick="sortNotebooks('title')">Sort by Title</button>
+                    </div>
+                </div>
+                <input type="text" id="search" placeholder="Search by title">
+            </div>
+        </div>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Creator</th>
+                        <th>Updated</th>
+                        <th>Shared With</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="notebookTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--New notebook -->
+    <div id="newNotebookModal" class="modal">
+        <div class="modal-content">
+            <h2>Create New Notebook</h2>
+                <input type="text" id="notebookName" placeholder="Enter notebook name">
+            <div>  
+                 <button id="cancelBtn" class="cancel">Cancel</button>
+                <button id="createBtn" class="create">Create</button>
+            </div>
+        </div>
+    </div>
+
+
        <!-- Trash -->
        <div class="trash-container">
         <div class="trash-sidebar">
@@ -347,6 +407,131 @@
                 </label>
             </div>
         </section>
+    </div>
+
+    <!-- Calendar -->
+    <div class="calendar-container">
+        <div class="calendar-sidebar">
+            <h1>Calendar</h1>
+            <div class="date" id="selected-date">Wednesday, October 9, 2024</div>
+            <div class="calendar">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                            <th>Sun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td onclick="selectDate('2024-10-01')">1</td>
+                        </tr>
+                        <tr>
+                            <td onclick="selectDate('2024-10-02')">2</td>
+                            <td onclick="selectDate('2024-10-03')">3</td>
+                            <td onclick="selectDate('2024-10-04')">4</td>
+                            <td onclick="selectDate('2024-10-05')">5</td>
+                            <td onclick="selectDate('2024-10-06')">6</td>
+                            <td onclick="selectDate('2024-10-07')">7</td>
+                            <td onclick="selectDate('2024-10-08')">8</td>
+                        </tr>
+                        <tr>
+                            <td onclick="selectDate('2024-10-09')">9</td>
+                            <td onclick="selectDate('2024-10-10')">10</td>
+                            <td onclick="selectDate('2024-10-11')">11</td>
+                            <td onclick="selectDate('2024-10-12')">12</td>
+                            <td onclick="selectDate('2024-10-13')">13</td>
+                            <td onclick="selectDate('2024-10-14')">14</td>
+                            <td onclick="selectDate('2024-10-15')">15</td>
+                        </tr>
+                        <tr>
+                            <td onclick="selectDate('2024-10-16')">16</td>
+                            <td onclick="selectDate('2024-10-17')">17</td>
+                            <td onclick="selectDate('2024-10-18')">18</td>
+                            <td onclick="selectDate('2024-10-19')">19</td>
+                            <td onclick="selectDate('2024-10-20')">20</td>
+                            <td onclick="selectDate('2024-10-21')">21</td>
+                            <td onclick="selectDate('2024-10-22')">22</td>
+                        </tr>
+                        <tr>
+                            <td onclick="selectDate('2024-10-23')">23</td>
+                            <td onclick="selectDate('2024-10-24')">24</td>
+                            <td onclick="selectDate('2024-10-25')">25</td>
+                            <td onclick="selectDate('2024-10-26')">26</td>
+                            <td onclick="selectDate('2024-10-27')">27</td>
+                            <td onclick="selectDate('2024-10-28')">28</td>
+                            <td onclick="selectDate('2024-10-29')">29</td>
+                        </tr>
+                        <tr>
+                            <td onclick="selectDate('2024-10-30')">30</td>
+                            <td onclick="selectDate('2024-10-31')">31</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="my-calendars">
+                <h2>MY CALENDARS</h2>
+                <ul class="calendar-list">
+                    <li><i class="fab fa-evernote" style="color: #2ecc71;"></i> <span>Evernote Calendar</span></li>
+                    <li>
+                        <input type="checkbox" id="events-checkbox" checked>
+                        <label for="events-checkbox"><i class="fas fa-circle" style="color: #2ecc71;"></i> Events</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="tasks-checkbox" checked>
+                        <label for="tasks-checkbox"><i class="fas fa-circle" style="color: #9b59b6;"></i> Tasks</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="connect-calendar">
+                <h2>CONNECT A CALENDAR</h2>
+                <button><i class="fab fa-google"></i> Google</button>
+                <button><i class="fab fa-microsoft"></i> Outlook</button>
+            </div>
+        </div>
+        <div class="calendar-main-content">
+            <div class="top-bar">
+                <div class="actions">
+                    <a id="new-event-btn"><i class="fas fa-calendar-plus"></i> New Event</a>
+                </div>
+                <div class="view-selector">
+                    <select id="view-selector">
+                        <option value="day">Day</option>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                    </select>
+                    <button id="today-btn">Today</button>
+                </div>
+            </div>
+            <div class="time-slots" id="time-slots">
+                <!-- Time slots will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="event-modal">
+        <span class="modal-close" id="modal-close">&times;</span>
+        <h2>Create New Event</h2>
+        <input type="date" id="event-date" placeholder="Date">
+        <input type="time" id="start-time" placeholder="Start Time">
+        <input type="time" id="end-time" placeholder="End Time">
+        <input type="text" id="event-name" placeholder="Event Name">
+        <button id="save-event">Save Event</button>
     </div>
 
 </div>
