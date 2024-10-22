@@ -3,7 +3,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
 }
 
@@ -62,9 +62,9 @@ body {
     width: 80px;
 }
 
-.sidebar.active ~ .main_content, .sidebar.active ~ .note-container, .sidebar.active ~ .container {
+.sidebar.active ~ .main_content, .sidebar.active ~ .note-container, .sidebar.active ~ .files-container, .sidebar.active ~ .notebooks-section {
     margin-left: 130px;
-    width: calc(100% - 80px);
+    width: calc(100% - 120px);
 }
 
 /* profile*/
@@ -102,20 +102,22 @@ body {
     display: flex;
     align-items: center;
     padding: 20px;
-    margin: 20px 0 15px 0;
+    margin: 20px auto;
     border-radius: 5px;
     height: 15px;
     background: #e6e6e6;
+    width: 95%;
 }
 
 .search_icon {
     color: rgba(0,0,0,0.5);
+    font-size: 1.5em !important;
 }
 
 .search_input {
-    font-size: 16px;
+    font-size: 1em;
     font-family: sans-serif;
-    margin-left: 10px;
+    margin-left: 5px;
     outline: none;
     border: none;
     background: transparent;
@@ -132,65 +134,116 @@ body {
 .create {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    gap: 5px;
+}
+
+.create button {
+    transition: all 0.3s;
 }
 
 .create button:hover {
     filter: brightness(0.8);
+    cursor: pointer;
 }
 
 .create .material-symbols-outlined {
-    font-size: 15px;
-    vertical-align: middle;
+    font-size: 1.5em;
     margin-right: 5px;
 }
 
+.create p {
+    font-size: 1.1em;
+}
+
+.more .material-symbols-outlined {
+    margin-right: 0;
+    font-size: 1.8em;
+}
+
+.note-more {
+    display: flex;
+    gap: 5px;
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+}
+
+.task-event {
+    display: flex;
+    gap: 5px;
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+}
+
 .note {
-    margin: 2px 1px;
-    width: 78%;
+    width: 75%;
     height: 40px;
     border-radius: 5px;
     color: white;
     background-color: #00a82d;
     border-width: 0;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .more {
-    margin: 2px 1px;
     width: 18%;
     height: 40px;
     border-radius: 5px;
     color: #4a4a4a;
     background-color: #e6e6e6;
     border-width: 0;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .task {
-    margin: 2px 1px;
-    width: 48%;
+    width: 46.5%;
     height: 40px;
     border-radius: 5px;
     color: white;
     background-color: #a158eb;
     border-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .event {
-    margin: 2px 1px;
-    width: 48%;
+    width: 46.5%;
     height: 40px;
     border-radius: 5px;
     color: white;
     background-color: #ee6631;
     border-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.sidebar.active .event,
-.sidebar.active .task,
-.sidebar.active .more,
-.sidebar.active .note {
-    width: 98%;
+.sidebar.active .note-more, .sidebar.active .task-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar.active .note, .sidebar.active .more, .sidebar.active .task, .sidebar.active .event, .sidebar.active .searchbar {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar.active .create .material-symbols-outlined {
+    margin: 0;
+}
+
+.sidebar.active .create b {
+    display: none;
 }
 
 /* navigation */
@@ -201,12 +254,15 @@ body {
 }
 
 .sidebar.active .navigation{
-    overflow-y: hidden;
-    max-height: 200px;
+    padding: 10px;
+    max-height: 400px;
 }
 
-.sidebar.active .navigation:hover {
-    overflow: auto;
+.sidebar.active .navigation li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 
 .navigation::-webkit-scrollbar {
@@ -228,9 +284,9 @@ body {
     background-color: #555;
   }
 
-.sidebar.active .navigation_item .material-symbols-outlined {
-    margin-left: 15px;
-    padding: 5px 0;
+.sidebar.active .navigation .material-symbols-outlined {
+    margin: 0;
+    padding: 0;
 }
 
 .navigation {
@@ -244,24 +300,18 @@ body {
     display: flex;
     align-items: center;
     gap: 3px;
-    
+    transition: all 0.3s;
 }
 
-.navigation ul :hover {
+.navigation li:hover, .navigation li.active {
     background: #e6e6e6;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.navigation_item .material-symbols-outlined,
-.log-out .material-symbols-outlined {
-    vertical-align: middle;
-    font-size: 20px;
-}
-
-.sidebar.active .log-out {
-    padding: 0;
-    margin: 30px;
+.navigation li:focus {
+    background-color: #e6e6e6;
+    border-radius: 5px;
 }
 
 .log-out {
@@ -269,13 +319,16 @@ body {
     bottom: 0;
     padding: 10px;
     margin: 10px;
-    transition: all 0.5s ease;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
 }
 
 .log-out:hover {
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 5px;
+    color: rgb(187, 0, 0);
 }
 
 /* main contents */
@@ -388,31 +441,31 @@ body {
 
 }
 
-.calendar {
+.calendar-home {
     width: clamp(150px, 250px, 90%);
     margin-top: 30px;
 }
 
-.calendar header {
+.calendar-home header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 0.8rem;
 }
 
-.calendar nav {
+.calendar-home nav {
     display: flex;
     align-items: center;
 }
 
-.calendar ul {
+.calendar-home ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
 }
 
-.calendar ul li {
+.calendar-home ul li {
     width: calc(100% / 7);
     position: relative;
     z-index: 2;

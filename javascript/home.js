@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskButton = document.querySelector('.task');
   const eventButton = document.querySelector('.event');
 
-
   noteButton.addEventListener('click', () => {
       alert('Note button clicked!');
       
@@ -75,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  const header = document.querySelector(".calendar h3");
+  const header = document.querySelector(".calendar-home h3");
   const dates = document.querySelector(".date");
   const navs = document.querySelectorAll("#prev, #next");
 
@@ -156,6 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCalendar();
 
+  // Keep the ".navigation li:hover" style when active
+  const navigationLi = document.querySelectorAll(".navigation li");
+  if (navigationLi.length > 0) {
+    navigationLi[0].classList.add("active");
+  }
+  navigationLi.forEach((item) => {
+    item.addEventListener("click", () => {
+      navigationLi.forEach((nav) => nav.classList.remove("active"));
+      item.classList.add("active");
+    });
+  });
+
   // Display notes
   const displayNotes = document.querySelector(".display-notes");
   const displayHome = document.querySelector(".display-home");
@@ -163,17 +174,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const displayNotebooks = document.querySelector(".display-notebooks");
   const displayTrash = document.querySelector(".display-trash");
   const displaySettings = document.querySelector(".display-settings");
-  const displayCalendar = document.querySelector(".display-calendar");
   
   const noteContainer = document.querySelector(".note-container");
   const mainContent = document.querySelector(".main_content");
-  const fileContainer = document.querySelector(".container");
+  const fileContainer = document.querySelector(".files-container");
   const notebookContainer = document.querySelector(".notebooks-section");
   const trashContainer = document.querySelector(".trash-container");
   const settingsContainer = document.querySelector(".settings-container");
   const logOut = document.querySelector(".log-out");
-  const calendarContainer = document.querySelector(".calendar-container");
-
+  
   function initializeNotebooks() {
     // Only initialize if notebooks array is empty
     if (!window.notebooks || window.notebooks.length === 0) {
@@ -194,7 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
     notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
-    calendarContainer.classList.remove("active");
   });
 
   displayHome.addEventListener("click", () => {
@@ -204,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
-    calendarContainer.classList.remove("active");
   });
 
   displayFiles.addEventListener("click", () => {
@@ -214,7 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
     notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
-    calendarContainer.classList.remove("active");
   }); 
 
   displayTrash.addEventListener("click", () => {
@@ -224,7 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fileContainer.classList.remove("active");
     notebookContainer.classList.remove("active");
     settingsContainer.classList.remove("active");
-    calendarContainer.classList.remove("active");
   });
 
   displaySettings.addEventListener("click", () => {
@@ -234,7 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fileContainer.classList.remove("active");
     notebookContainer.classList.remove("active");
     trashContainer.classList.remove("active");
-    calendarContainer.classList.remove("active");
   });
 
   displayNotebooks.addEventListener("click", () => {
@@ -244,23 +248,16 @@ document.addEventListener("DOMContentLoaded", () => {
     fileContainer.classList.remove("active");
     notebookContainer.classList.add("active");
     trashContainer.classList.remove("active");
-    calendarContainer.classList.remove("active");
 
     initializeNotebooks();
   });
 
-  displayCalendar.addEventListener("click", () => {
-    settingsContainer.classList.remove("active");
-    mainContent.style.display = "none";
-    noteContainer.classList.remove("active");
-    fileContainer.classList.remove("active");
-    notebookContainer.classList.remove("active");
-    trashContainer.classList.remove("active");
-    calendarContainer.classList.add("active");
-  });
-
-  logOut.addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = "login.html";
-  });
+  if (logOut) {
+    logOut.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.href = "login.html";
+    });
+} else {
+    console.error("Logout button not found in the document");
+}
 });

@@ -215,7 +215,7 @@ function showFilePreview(fileElement) {
 function goToNote() {
     const noteContainer = document.querySelector(".note-container");
     const goToNote = document.querySelector(".go-to-note");
-    const fileContainer = document.querySelector(".container");
+    const fileContainer = document.querySelector(".files-container");
     goToNote.addEventListener("click", () => {
         noteContainer.classList.add("active");
         fileContainer.classList.remove("active");

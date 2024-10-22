@@ -12,7 +12,7 @@ loginBtn.addEventListener('click', ()=>{
 });
 
 // Handle login
-const signInBtn = document.querySelector('.sign-in');
+const signInBtn = document.querySelector('.sign-in-btn');
 signInBtn.addEventListener('click', function(event){
     event.preventDefault();
     window.location.href = "home.html";// change index.html with the file you want to redirect

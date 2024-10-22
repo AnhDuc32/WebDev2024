@@ -4,7 +4,7 @@ body {
     background: transparent;
     color: #333333;
 }
-.container {
+.files-container {
     position: absolute;
     right: 0px;
     width: 84%;
@@ -14,7 +14,7 @@ body {
     flex-direction: row;
     transition: all 0.5s ease;
 }
-.container.active {
+.files-container.active {
     display: flex;
 }
 .sidebar-hacao {

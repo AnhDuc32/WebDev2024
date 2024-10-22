@@ -100,7 +100,7 @@ body{
 }
 
 .container.active .sign-in{
-    transform: translateX(100%);
+    transform: translateX(100%);    
 }
 
 .sign-up{
